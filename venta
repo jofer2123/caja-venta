@@ -1,7 +1,7 @@
 /*
  *  Programa de venta por lectura de codigo de barra
- * 
- *
+ * auto suma productos registrados en un archivo txt
+ * ingresando solo el codigo
  */
 package javaapplication3;
 
