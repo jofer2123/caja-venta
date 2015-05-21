@@ -1,0 +1,141 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication3;
+
+import java.io.BufferedReader;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+/**
+ *
+ * @author fefy
+ */
+public class JavaApplication3 {
+    private static Object Interger;
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+     /**
+     * variables de los menus
+     */
+        int menu=0;
+      int opcion=0;
+      /**
+     * variables para el manejo de archivos u unidad asi tanto para el bufer de lectura y creacion de archivos
+     */
+      String unidad;  
+      FileReader file = null;
+      BufferedReader bufer = null;
+ FileReader file2 = null;
+      BufferedReader bufer2 = null;
+      FileReader file3 = null;
+      BufferedReader bufer3 = null;
+      System.out.println("ingrese unidad ");
+     Scanner in = new Scanner(System.in);
+      unidad= in.nextLine();
+      File codigo =new File(unidad+"://codigo.txt");
+      File producto =new File(unidad+"://producto.txt");
+      File precio =new File(unidad+"://precio.txt");
+      final Formatter nuevocodigo;
+      final Formatter nuevoproducto;
+      final Formatter nuevoprecio;
+      file = new FileReader (codigo);
+                  bufer = new BufferedReader(file);
+                  file2 = new FileReader (producto);
+                  bufer2 = new BufferedReader(file2);
+                  file3 = new FileReader (precio);
+                  bufer3 = new BufferedReader(file3);
+                  String linea;
+                  String linea2;
+                  String linea3;
+                  
+                 int n=0;
+                 int p=0;
+                 int cod=1;
+                 int total=0;
+                 int i=0;
+      /**
+     * estructura de decicion nesesaria para determinar la exitencia de los archivo y en caso de no existir dara la opcion de crearlos
+     */           
+      if(codigo.exists() && producto.exists() && precio.exists()){
+          if(codigo.canWrite() && codigo.canWrite() && codigo.canWrite()){
+          System.out.println("OK");
+          }else{
+          System.out.println("ERROR ESCRITURA");
+          
+          }
+      
+      }else{
+     System.out.println("ERROR ARCHIVOS NO ENCONTRADOS");
+       System.out.println("�Desea crearlos?");
+       System.out.println("1=Si    2=No");
+       opcion = in.nextInt();
+       switch(opcion){
+              case 1:
+                 
+                     nuevocodigo = new Formatter(unidad+"://codigo.txt");
+                     nuevoproducto = new Formatter(unidad+"://producto.txt");
+                     nuevoprecio = new Formatter(unidad+"://precio.txt");
+                     System.out.println("Archivos creados en:");
+                 System.out.println(unidad+"://");
+                 
+                 break;
+              case 2:
+                  System.out.println("Adios");
+                  
+                  break;
+       }
+       
+      }
+      System.out.println("MENU");
+      System.out.println("_________________________");
+      System.out.println("1 - Caja");
+    System.out.println("2 - Lista Productos");
+      menu = in.nextInt();
+     /**
+     * Menu en donde se accede a la caja 
+     * una estructura de repeticion se carga los datos del archivo en variables 
+     *y a traves de una estuctura de decicion se suman solo los precios que sean iguales al codigo
+     *
+     */
+          switch(menu){
+              case 1:
+                   System.out.println("ingrese codigo para total pulse 0");
+                  cod =in.nextInt();
+                   while(cod != 0){
+                   cod =in.nextInt();
+                  while((linea= bufer.readLine())!=null && (linea2= bufer2.readLine())!=null && (linea3= bufer3.readLine())!=null){
+            
+                n = Integer.parseInt(linea);
+                  p = Integer.parseInt(linea3);
+                 if(cod==n){
+                   total=p+total;  
+                System.out.println(linea2+" precio $"+p);
+                 }else{}
+                  }
+                  }
+                 System.out.println("El total es: "+total);
+                 
+                  
+                      
+                break;
+              case 2:
+                  while((linea= bufer.readLine())!=null && (linea2= bufer2.readLine())!=null && (linea3= bufer3.readLine())!=null){
+            System.out.println(linea+"  "+linea2+"  "+linea3);
+      }
+                  break;
+             
+          } 
+// TODO code application logic here
+    }
+    
+}
+
